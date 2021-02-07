@@ -10,6 +10,7 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "propertyrenters")
+@IdClass(PropertyRentersId.class)
 public class PropertyRenters extends Auditable implements Serializable {
 
     @Id
