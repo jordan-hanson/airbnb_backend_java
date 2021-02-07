@@ -1,10 +1,15 @@
 package com.jh22.airbnb.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "users")
@@ -32,6 +37,18 @@ public class User extends Auditable{
     @NotNull
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
+
+    @OneToMany(mappedBy = "property",
+    cascade = CascadeType.ALL,
+    orphanRemoval = true)
+    private List<Property> properties = new ArrayList<>();
+
+    @OneToMany(mappedBy = "user",
+    cascade = CascadeType.ALL,
+    orphanRemoval = true)
+    @JsonIgnoreProperties(value = "user",
+    allowSetters = true)
+    private Set<PropertyRenters> rentProperties = new HashSet<>();
 
     public User() {
     }

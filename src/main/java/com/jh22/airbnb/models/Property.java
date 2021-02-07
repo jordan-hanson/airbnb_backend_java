@@ -36,6 +36,13 @@ public class Property extends Auditable{
     @NotNull
     private String pictures;
 
+    @ManyToOne
+    @JoinColumn(name = "userid",
+    nullable = false)
+    private User ownerUser;
+
+
+
     public Property() {
     }
 
