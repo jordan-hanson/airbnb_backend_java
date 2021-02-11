@@ -50,6 +50,13 @@ public class User extends Auditable{
     allowSetters = true)
     private Set<PropertyRenters> rentProperties = new HashSet<>();
 
+    @OneToMany(mappedBy = "user",
+    cascade = CascadeType.ALL,
+    orphanRemoval = true)
+    @JsonIgnoreProperties(value = "user",
+    allowSetters = true)
+    private Set<UserRoles> userRoles = new HashSet<>();
+
     public User() {
     }
 
