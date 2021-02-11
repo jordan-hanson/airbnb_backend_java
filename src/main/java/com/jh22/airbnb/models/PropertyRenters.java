@@ -57,13 +57,19 @@ public class PropertyRenters extends Auditable implements Serializable {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
+
         if (o == null || getClass() != o.getClass()) return false;
+
         PropertyRenters that = (PropertyRenters) o;
-        return getRenters().equals(that.getRenters()) && getProperties().equals(that.getProperties());
+
+        return ((renters == null) ? 0 : renters.getUserid()) == ((that.renters == null) ? 0 :
+                that.renters.getUserid()) &&
+                ((properties == null) ? 0 : properties.getPropertyid()) == ((that.properties == null) ? 0 :
+                        that.properties.getPropertyid());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getRenters(), getProperties());
+        return 22;
     }
 }
