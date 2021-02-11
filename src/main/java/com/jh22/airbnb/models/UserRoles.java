@@ -59,10 +59,8 @@ public class UserRoles extends Auditable implements Serializable {
 
         UserRoles that = (UserRoles) o;
 
-        return ((user == null) ? 0 : user.getUserid()) == ((that.user == null) ? 0 :
-                that.user.getUserid()) &&
-                ((role == null) ? 0 : role.getRoleid()) == ((that.role == null) ? 0 :
-                        that.role.getRoleid());
+        return ((user == null) ? 0 : user.getUserid()) == ((that.user == null) ? 0 : that.user.getUserid()) &&
+                ((role == null) ? 0 : role.getRoleid()) == ((that.role == null) ? 0 : that.role.getRoleid());
     }
 
     @Override

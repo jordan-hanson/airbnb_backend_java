@@ -1,7 +1,11 @@
 package com.jh22.airbnb.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "properties")
@@ -36,11 +40,22 @@ public class Property extends Auditable{
     @NotNull
     private String pictures;
 
-    @ManyToOne
-    @JoinColumn(name = "userid",
-    nullable = false)
-    private User ownerUser;
+//    @ManyToOne
+//    @JoinColumn(name = "userid",
+//    nullable = false)
+//    private User ownerUser;
 
+    @OneToMany(mappedBy = "property",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true)
+    @JsonIgnoreProperties(value = "property", allowSetters = true)
+    private Set<PropertyRenters> renters = new HashSet<>();
+
+    @OneToMany(mappedBy = "property",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true)
+    @JsonIgnoreProperties(value = "property", allowSetters = true)
+    private Set<PropertyOwners> owners = new HashSet<>();
 
 
     public Property() {
@@ -136,4 +151,5 @@ public class Property extends Auditable{
     public void setPictures(String pictures) {
         this.pictures = pictures;
     }
+
 }

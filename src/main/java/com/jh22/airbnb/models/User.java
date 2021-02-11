@@ -38,10 +38,17 @@ public class User extends Auditable{
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
 
-    @OneToMany(mappedBy = "property",
+//    @OneToMany(mappedBy = "user",
+//    cascade = CascadeType.ALL,
+//    orphanRemoval = true)
+//    private List<Property> properties = new ArrayList<>();
+
+    @OneToMany(mappedBy = "user",
     cascade = CascadeType.ALL,
     orphanRemoval = true)
-    private List<Property> properties = new ArrayList<>();
+    @JsonIgnoreProperties(value = "user",
+    allowSetters = true)
+    private Set<PropertyOwners> ownerProperties = new HashSet<>();
 
     @OneToMany(mappedBy = "user",
     cascade = CascadeType.ALL,
@@ -55,7 +62,7 @@ public class User extends Auditable{
     orphanRemoval = true)
     @JsonIgnoreProperties(value = "user",
     allowSetters = true)
-    private Set<UserRoles> userRoles = new HashSet<>();
+    private Set<UserRoles> roles = new HashSet<>();
 
     public User() {
     }

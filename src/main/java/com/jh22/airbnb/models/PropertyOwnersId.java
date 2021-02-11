@@ -1,25 +1,26 @@
 package com.jh22.airbnb.models;
 
+
 import java.io.Serializable;
 
-public class PropertyRentersId implements Serializable {
-    private long user;
+public class PropertyOwnersId implements Serializable {
+    private long owner;
     private long property;
 
-    public PropertyRentersId() {
+    public PropertyOwnersId() {
     }
 
-    public PropertyRentersId(long user, long property) {
-        this.user = user;
+    public PropertyOwnersId(long owner, long property) {
+        this.owner = owner;
         this.property = property;
     }
 
-    public long getUser() {
-        return user;
+    public long getOwner() {
+        return owner;
     }
 
-    public void setUser(long user) {
-        this.user = user;
+    public void setOwner(long owner) {
+        this.owner = owner;
     }
 
     public long getProperty() {
@@ -36,9 +37,9 @@ public class PropertyRentersId implements Serializable {
 
         if (o == null || getClass() != o.getClass()) return false;
 
-        PropertyRentersId that = (PropertyRentersId) o;
+        PropertyOwnersId that = (PropertyOwnersId) o;
 
-        return getUser() == that.getUser() && getProperty() == that.getProperty();
+        return getOwner() == that.getOwner() && getProperty() == that.getProperty();
     }
 
     @Override
