@@ -18,39 +18,39 @@ public class PropertyRenters extends Auditable implements Serializable {
     @JoinColumn(name = "userid")
     @JsonIgnoreProperties(value = "properties",
     allowSetters = true)
-    private User renters;
+    private User renter;
 
     @Id
     @ManyToOne
     @NotNull
     @JoinColumn(name = "propertyid")
-    @JsonIgnoreProperties(value = "users",
+    @JsonIgnoreProperties(value = "renters",
     allowSetters = true)
-    private Property properties;
+    private Property property;
 
     public PropertyRenters() {
     }
 
-    public PropertyRenters(@NotNull User renters,
-                           @NotNull Property properties) {
-        this.renters = renters;
-        this.properties = properties;
+    public PropertyRenters(@NotNull User renter,
+                           @NotNull Property property) {
+        this.renter = renter;
+        this.property = property;
     }
 
-    public User getRenters() {
-        return renters;
+    public User getRenter() {
+        return renter;
     }
 
-    public void setRenters(User renters) {
-        this.renters = renters;
+    public void setRenter(User renters) {
+        this.renter = renters;
     }
 
-    public Property getProperties() {
-        return properties;
+    public Property getProperty() {
+        return property;
     }
 
-    public void setProperties(Property properties) {
-        this.properties = properties;
+    public void setProperty(Property properties) {
+        this.property = properties;
     }
 
     @Override
@@ -61,10 +61,10 @@ public class PropertyRenters extends Auditable implements Serializable {
 
         PropertyRenters that = (PropertyRenters) o;
 
-        return ((renters == null) ? 0 : renters.getUserid()) == ((that.renters == null) ? 0 :
-                that.renters.getUserid()) &&
-                ((properties == null) ? 0 : properties.getPropertyid()) == ((that.properties == null) ? 0 :
-                        that.properties.getPropertyid());
+        return ((renter == null) ? 0 : renter.getUserid()) == ((that.renter == null) ? 0 :
+                that.renter.getUserid()) &&
+                ((property == null) ? 0 : property.getPropertyid()) == ((that.property == null) ? 0 :
+                        that.property.getPropertyid());
     }
 
     @Override

@@ -48,14 +48,14 @@ public class Property extends Auditable{
     @OneToMany(mappedBy = "property",
             cascade = CascadeType.ALL,
             orphanRemoval = true)
-    @JsonIgnoreProperties(value = "property", allowSetters = true)
-    private Set<PropertyRenters> renters = new HashSet<>();
+    @JsonIgnoreProperties(value = "properties", allowSetters = true)
+    private Set<PropertyOwners> owner = new HashSet<>();
 
     @OneToMany(mappedBy = "property",
             cascade = CascadeType.ALL,
             orphanRemoval = true)
-    @JsonIgnoreProperties(value = "property", allowSetters = true)
-    private Set<PropertyOwners> owners = new HashSet<>();
+    @JsonIgnoreProperties(value = "properties", allowSetters = true)
+    private Set<PropertyRenters> renters = new HashSet<>();
 
 
     public Property() {

@@ -2,12 +2,13 @@ package com.jh22.airbnb.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
+@Entity
+@Table(name = "propertyowners")
+@IdClass(PropertyOwnersId.class)
 public class PropertyOwners extends Auditable implements Serializable {
     @Id
     @ManyToOne
@@ -21,16 +22,16 @@ public class PropertyOwners extends Auditable implements Serializable {
     @ManyToOne
     @NotNull
     @JoinColumn(name = "propertyid")
-    @JsonIgnoreProperties(value = "users",
+    @JsonIgnoreProperties(value = "owner",
     allowSetters = true)
-    private Property properties;
+    private Property property;
 
     public PropertyOwners() {
     }
 
-    public PropertyOwners(@NotNull User owner, @NotNull Property properties) {
+    public PropertyOwners(@NotNull User owner, @NotNull Property property) {
         this.owner = owner;
-        this.properties = properties;
+        this.property = property;
     }
 
     public User getOwner() {
@@ -41,13 +42,14 @@ public class PropertyOwners extends Auditable implements Serializable {
         this.owner = owner;
     }
 
-    public Property getProperties() {
-        return properties;
+    public Property getProperty() {
+        return property;
     }
 
-    public void setProperties(Property properties) {
-        this.properties = properties;
+    public void setProperty(Property property) {
+        this.property = property;
     }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -57,7 +59,7 @@ public class PropertyOwners extends Auditable implements Serializable {
         PropertyOwners that = (PropertyOwners) o;
 
         return ((owner == null) ? 0 : owner.getUserid()) == ((that.owner == null) ? 0 : that.owner.getUserid()) &&
-                ((properties == null) ? 0 : properties.getPropertyid()) == ((that.properties == null) ? 0 : that.properties.getPropertyid());
+                ((property == null) ? 0 : property.getPropertyid()) == ((that.property == null) ? 0 : that.property.getPropertyid());
     }
 
     @Override

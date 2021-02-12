@@ -6,9 +6,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -43,19 +41,19 @@ public class User extends Auditable{
 //    orphanRemoval = true)
 //    private List<Property> properties = new ArrayList<>();
 
-    @OneToMany(mappedBy = "user",
+    @OneToMany(mappedBy = "owner",
     cascade = CascadeType.ALL,
     orphanRemoval = true)
-    @JsonIgnoreProperties(value = "user",
+    @JsonIgnoreProperties(value = "owner",
     allowSetters = true)
-    private Set<PropertyOwners> ownerProperties = new HashSet<>();
+    private Set<PropertyOwners> ownerproperties = new HashSet<>();
 
-    @OneToMany(mappedBy = "user",
+    @OneToMany(mappedBy = "renter",
     cascade = CascadeType.ALL,
     orphanRemoval = true)
-    @JsonIgnoreProperties(value = "user",
+    @JsonIgnoreProperties(value = "renter",
     allowSetters = true)
-    private Set<PropertyRenters> rentProperties = new HashSet<>();
+    private Set<PropertyRenters> rentproperties = new HashSet<>();
 
     @OneToMany(mappedBy = "user",
     cascade = CascadeType.ALL,
@@ -121,5 +119,29 @@ public class User extends Auditable{
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public Set<PropertyOwners> getOwnerproperties() {
+        return ownerproperties;
+    }
+
+    public void setOwnerproperties(Set<PropertyOwners> ownerproperties) {
+        this.ownerproperties = ownerproperties;
+    }
+
+    public Set<PropertyRenters> getRentproperties() {
+        return rentproperties;
+    }
+
+    public void setRentproperties(Set<PropertyRenters> rentproperties) {
+        this.rentproperties = rentproperties;
+    }
+
+    public Set<UserRoles> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<UserRoles> roles) {
+        this.roles = roles;
     }
 }
