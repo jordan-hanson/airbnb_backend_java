@@ -32,6 +32,14 @@ public class Role extends Auditable{
         this.name = name;
     }
 
+    public Set<UserRoles> getUsers() {
+        return users;
+    }
+
+    public void setUsers(Set<UserRoles> users) {
+        this.users = users;
+    }
+
     public long getRoleid() {
         return roleid;
     }

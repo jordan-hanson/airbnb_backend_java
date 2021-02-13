@@ -152,4 +152,19 @@ public class Property extends Auditable{
         this.pictures = pictures;
     }
 
+    public Set<PropertyOwners> getOwner() {
+        return owner;
+    }
+
+    public void setOwner(Set<PropertyOwners> owner) {
+        this.owner = owner;
+    }
+
+    public Set<PropertyRenters> getRenters() {
+        return renters;
+    }
+
+    public void setRenters(Set<PropertyRenters> renters) {
+        this.renters = renters;
+    }
 }
