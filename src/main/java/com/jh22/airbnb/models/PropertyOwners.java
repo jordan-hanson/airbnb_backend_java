@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.util.Date;
 
 @Entity
 @Table(name = "propertyowners")
@@ -25,6 +26,12 @@ public class PropertyOwners extends Auditable implements Serializable {
     @JsonIgnoreProperties(value = "owner",
     allowSetters = true)
     private Property property;
+
+    @NotNull
+    private Date subStDate;
+
+    @NotNull
+    private Date subExpDate;
 
     public PropertyOwners() {
     }
@@ -48,6 +55,22 @@ public class PropertyOwners extends Auditable implements Serializable {
 
     public void setProperty(Property property) {
         this.property = property;
+    }
+
+    public Date getSubStDate() {
+        return subStDate;
+    }
+
+    public void setSubStDate(Date subStDate) {
+        this.subStDate = subStDate;
+    }
+
+    public Date getSubExpDate() {
+        return subExpDate;
+    }
+
+    public void setSubExpDate(Date subExpDate) {
+        this.subExpDate = subExpDate;
     }
 
     @Override
