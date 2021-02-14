@@ -32,4 +32,5 @@ INSERT INTO cards(cardid, name, number, type, expDate, securityCode, created_by,
           (2, 'Rtest TestRenter', 4567890123, 'DISCOVER', 0321, 321, 'SYSTEM', CURRENT_TIMESTAMP, 'SYSTEM', CURRENT_TIMESTAMP),
           (3, 'Otest TestOwner', 3456789012, 'MASTERCARD', 4321, 432, 'SYSTEM', CURRENT_TIMESTAMP, 'SYSTEM', CURRENT_TIMESTAMP);
 
-INSERT INTO
+INSERT INTO propertyowners(owner, property, subStDate, subExpDate, created_by, created_date, last_modified_by, last_modified_date)
+    VALUES(1, 1, CURRENT_DATE, CURRENT_DATE, 'SYSTEM', CURRENT_TIMESTAMP, 'SYSTEM', CURRENT_TIMESTAMP)
