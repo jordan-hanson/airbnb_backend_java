@@ -36,9 +36,11 @@ public class PropertyOwners extends Auditable implements Serializable {
     public PropertyOwners() {
     }
 
-    public PropertyOwners(@NotNull User owner, @NotNull Property property) {
+    public PropertyOwners(@NotNull User owner, @NotNull Property property, @NotNull Date subStDate, @NotNull Date subExpDate) {
         this.owner = owner;
         this.property = property;
+        this.subStDate = subStDate;
+        this.subExpDate = subExpDate;
     }
 
     public User getOwner() {

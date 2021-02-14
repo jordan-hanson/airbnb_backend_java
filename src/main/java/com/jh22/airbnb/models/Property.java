@@ -40,11 +40,6 @@ public class Property extends Auditable{
     @NotNull
     private String pictures;
 
-//    @ManyToOne
-//    @JoinColumn(name = "userid",
-//    nullable = false)
-//    private User ownerUser;
-
     @OneToMany(mappedBy = "property",
             cascade = CascadeType.ALL,
             orphanRemoval = true)
