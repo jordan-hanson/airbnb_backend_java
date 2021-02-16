@@ -18,8 +18,8 @@ public class CardInfo extends Auditable{
 
     @NotNull
     @Column(unique = true)
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    private Integer number;
+//    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    private String number;
 
     @NotNull
     private String type;
@@ -34,7 +34,7 @@ public class CardInfo extends Auditable{
     }
 
     public CardInfo(@NotNull String name,
-                    @NotNull Integer number,
+                    @NotNull String number,
                     @NotNull String type,
                     @NotNull Integer expdate,
                     @NotNull Integer securitycode)
@@ -62,11 +62,11 @@ public class CardInfo extends Auditable{
         this.name = name;
     }
 
-    public Integer getNumber() {
+    public String getNumber() {
         return number;
     }
 
-    public void setNumber(Integer number) {
+    public void setNumber(String number) {
         this.number = number;
     }
 

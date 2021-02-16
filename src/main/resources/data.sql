@@ -28,20 +28,20 @@ INSERT INTO properties(propertyid, title, description, street, city, state, zipc
           (4, 'Desert Camper Getaway', 'Rustic camper in desert area.', '50 South Hobo Camp', 'IguanaWay', 'Nevada', 32467, 99.00, 'pictures', 'SYSTEM', CURRENT_TIMESTAMP, 'SYSTEM', CURRENT_TIMESTAMP);
 
 INSERT INTO cards(cardid, name, number, type, expdate, securitycode, created_by, created_date, last_modified_by, last_modified_date)
-    VALUES(1, 'Utest TestUser', 1234, 'VISA', 0221, 123, 'SYSTEM', CURRENT_TIMESTAMP, 'SYSTEM', CURRENT_TIMESTAMP),
-          (2, 'Rtest TestRenter', 4567, 'DISCOVER', 0321, 321, 'SYSTEM', CURRENT_TIMESTAMP, 'SYSTEM', CURRENT_TIMESTAMP),
-          (3, 'Otest TestOwner', 3456, 'MASTERCARD', 4321, 432, 'SYSTEM', CURRENT_TIMESTAMP, 'SYSTEM', CURRENT_TIMESTAMP);
+    VALUES(1, 'Utest TestUser', '3234567890', 'VISA', 0221, 123, 'SYSTEM', CURRENT_TIMESTAMP, 'SYSTEM', CURRENT_TIMESTAMP),
+          (2, 'Rtest TestRenter', '456789012345', 'DISCOVER', 0321, 321, 'SYSTEM', CURRENT_TIMESTAMP, 'SYSTEM', CURRENT_TIMESTAMP),
+          (3, 'Otest TestOwner', '345678901234', 'MASTERCARD', 4321, 432, 'SYSTEM', CURRENT_TIMESTAMP, 'SYSTEM', CURRENT_TIMESTAMP);
 
--- INSERT INTO propertyowners(owner, property, substdate, subexpdate, created_by, created_date, last_modified_by, last_modified_date)
---     VALUES(1, 1, CURRENT_DATE, CURRENT_DATE, 'SYSTEM', CURRENT_TIMESTAMP, 'SYSTEM', CURRENT_TIMESTAMP),
---           (3, 2, CURRENT_DATE, CURRENT_DATE, 'SYSTEM', CURRENT_TIMESTAMP, 'SYSTEM', CURRENT_TIMESTAMP);
---
--- INSERT INTO propertyrenters(renter, property, created_by, created_date, last_modified_by, last_modified_date)
---     VALUES(2, 4, 'SYSTEM', CURRENT_TIMESTAMP, 'SYSTEM', CURRENT_TIMESTAMP),
---           (2, 3, 'SYSTEM', CURRENT_TIMESTAMP, 'SYSTEM', CURRENT_TIMESTAMP);
---
--- INSERT INTO userroles(user, role, created_by, created_date, last_modified_by, last_modified_date)
---     VALUES(1, 1, 'SYSTEM', CURRENT_TIMESTAMP, 'SYSTEM', CURRENT_TIMESTAMP),
---           (3, 4, 'SYSTEM', CURRENT_TIMESTAMP, 'SYSTEM', CURRENT_TIMESTAMP),
---           (2, 3, 'SYSTEM', CURRENT_TIMESTAMP, 'SYSTEM', CURRENT_TIMESTAMP),
---           (1, 2, 'SYSTEM', CURRENT_TIMESTAMP, 'SYSTEM', CURRENT_TIMESTAMP);
+INSERT INTO propertyowners(userid, propertyid, substdate, subexpdate, created_by, created_date, last_modified_by, last_modified_date)
+    VALUES(1, 1, CURRENT_DATE, CURRENT_DATE, 'SYSTEM', CURRENT_TIMESTAMP, 'SYSTEM', CURRENT_TIMESTAMP),
+          (3, 2, CURRENT_DATE, CURRENT_DATE, 'SYSTEM', CURRENT_TIMESTAMP, 'SYSTEM', CURRENT_TIMESTAMP);
+
+INSERT INTO propertyrenters(userid, propertyid, created_by, created_date, last_modified_by, last_modified_date)
+    VALUES(2, 4, 'SYSTEM', CURRENT_TIMESTAMP, 'SYSTEM', CURRENT_TIMESTAMP),
+          (2, 3, 'SYSTEM', CURRENT_TIMESTAMP, 'SYSTEM', CURRENT_TIMESTAMP);
+
+INSERT INTO userroles(userid, roleid, created_by, created_date, last_modified_by, last_modified_date)
+    VALUES(1, 1, 'SYSTEM', CURRENT_TIMESTAMP, 'SYSTEM', CURRENT_TIMESTAMP),
+          (3, 4, 'SYSTEM', CURRENT_TIMESTAMP, 'SYSTEM', CURRENT_TIMESTAMP),
+          (2, 3, 'SYSTEM', CURRENT_TIMESTAMP, 'SYSTEM', CURRENT_TIMESTAMP),
+          (1, 2, 'SYSTEM', CURRENT_TIMESTAMP, 'SYSTEM', CURRENT_TIMESTAMP);
