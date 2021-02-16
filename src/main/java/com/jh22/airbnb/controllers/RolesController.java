@@ -1,6 +1,7 @@
 package com.jh22.airbnb.controllers;
 
 import com.jh22.airbnb.models.Role;
+import com.jh22.airbnb.services.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,10 +28,12 @@ public class RolesController {
         return new ResponseEntity<>(allRoles, HttpStatus.OK);
     }
 //    Find role by roleid
+//    http://localhost:2019/roles/role/1
     @GetMapping(value = "role/{roleId}", produces = "application/json")
     public ResponseEntity<?> findRoleById(@PathVariable long roleId)
     {
         Role r = roleService.findRoleById(roleId);
         return new ResponseEntity<>(r, HttpStatus.OK);
     }
+
 }
