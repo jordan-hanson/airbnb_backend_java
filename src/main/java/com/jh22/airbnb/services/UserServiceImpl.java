@@ -25,4 +25,38 @@ public class UserServiceImpl implements UserService{
                 .forEachRemaining(list::add);
         return list;
     }
+
+    @Override
+    public User findUserById(long userId) {
+        return null;
+    }
+
+    @Override
+    public User findUserByUserName(String userName) {
+        return null;
+    }
+
+    @Transactional
+    @Override
+    public User save(User newuser) {
+        return null;
+    }
+
+    @Transactional
+    @Override
+    public void update(User updateUser, long userId) {
+
+    }
+
+    @Transactional
+    @Override
+    public void delete(long userId) {
+
+    }
+
+    @Transactional
+    @Override
+    public void deleteAll() {
+
+    }
 }
