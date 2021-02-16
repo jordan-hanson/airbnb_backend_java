@@ -28,19 +28,19 @@ public class PropertyOwners extends Auditable implements Serializable {
     private Property property;
 
     @NotNull
-    private Date subStDate;
+    private Date substdate;
 
     @NotNull
-    private Date subExpDate;
+    private Date subexpdate;
 
     public PropertyOwners() {
     }
 
-    public PropertyOwners(@NotNull User owner, @NotNull Property property, @NotNull Date subStDate, @NotNull Date subExpDate) {
+    public PropertyOwners(@NotNull User owner, @NotNull Property property, @NotNull Date substdate, @NotNull Date subexpdate) {
         this.owner = owner;
         this.property = property;
-        this.subStDate = subStDate;
-        this.subExpDate = subExpDate;
+        this.substdate = substdate;
+        this.subexpdate = subexpdate;
     }
 
     public User getOwner() {
@@ -59,20 +59,20 @@ public class PropertyOwners extends Auditable implements Serializable {
         this.property = property;
     }
 
-    public Date getSubStDate() {
-        return subStDate;
+    public Date getSubstdate() {
+        return substdate;
     }
 
-    public void setSubStDate(Date subStDate) {
-        this.subStDate = subStDate;
+    public void setSubstdate(Date subStDate) {
+        this.substdate = substdate;
     }
 
-    public Date getSubExpDate() {
-        return subExpDate;
+    public Date getSubexpdate() {
+        return subexpdate;
     }
 
-    public void setSubExpDate(Date subExpDate) {
-        this.subExpDate = subExpDate;
+    public void setSubexpdate(Date subExpDate) {
+        this.subexpdate = subexpdate;
     }
 
     @Override

@@ -25,10 +25,10 @@ public class CardInfo extends Auditable{
     private String type;
 
     @NotNull
-    private Integer expDate;
+    private Integer expdate;
 
     @NotNull
-    private Integer securityCode;
+    private Integer securitycode;
 
     public CardInfo() {
     }
@@ -36,14 +36,14 @@ public class CardInfo extends Auditable{
     public CardInfo(@NotNull String name,
                     @NotNull Integer number,
                     @NotNull String type,
-                    @NotNull Integer expDate,
-                    @NotNull Integer securityCode)
+                    @NotNull Integer expdate,
+                    @NotNull Integer securitycode)
     {
         this.name = name;
         this.number = number;
         this.type = type;
-        this.expDate = expDate;
-        this.securityCode = securityCode;
+        this.expdate = expdate;
+        this.securitycode = securitycode;
     }
 
     public long getCardid() {
@@ -78,19 +78,19 @@ public class CardInfo extends Auditable{
         this.type = type;
     }
 
-    public Integer getExpDate() {
-        return expDate;
+    public Integer getExpdate() {
+        return expdate;
     }
 
-    public void setExpDate(Integer expDate) {
-        this.expDate = expDate;
+    public void setExpdate(Integer expdate) {
+        this.expdate = expdate;
     }
 
-    public Integer getSecurityCode() {
-        return securityCode;
+    public Integer getSecuritycode() {
+        return securitycode;
     }
 
-    public void setSecurityCode(Integer securityCode) {
-        this.securityCode = securityCode;
+    public void setSecuritycode(Integer securitycode) {
+        this.securitycode = securitycode;
     }
 }
