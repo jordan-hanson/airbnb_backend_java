@@ -1,6 +1,8 @@
 package com.jh22.airbnb.services;
 
 import com.jh22.airbnb.exceptions.ResourceNotFoundException;
+import com.jh22.airbnb.models.Property;
+import com.jh22.airbnb.models.PropertyOwners;
 import com.jh22.airbnb.models.User;
 import com.jh22.airbnb.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -75,7 +77,13 @@ public class UserServiceImpl implements UserService{
 
 //      PASSWORD OWNERPROPERTIES RENTALPROPERTIES AND ROLES
         newUserMade.setPassword(newuser.getPassword());
-
+//      OWNERPROPERTIES RELATIONSHIP - CREATE SERVICES FOR PROPERTYID AND USERID IS ABOVE^ AND AUTOWIRE IN
+        newUserMade.getOwnerproperties()
+                .clear();
+        for (PropertyOwners up : newuser.getOwnerproperties())
+        {
+            Property property = propertyService.findPropertyById()
+        }
 
         return userRepo.save(newuser);
     }
