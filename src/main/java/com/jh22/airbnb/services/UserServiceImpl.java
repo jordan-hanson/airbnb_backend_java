@@ -131,6 +131,7 @@ public class UserServiceImpl implements UserService{
     public void update(User updateUser, long userId)
     {
 //        TODO MODIFY TO UPDATE USER
+//        modification in process
         //        STEP 1 VERIFY NEW USERNAME (UNIQUE = TRUE) ISN'T ON DB
         User existingUser = userRepo.findByUsername(newuser.getUsername());
         if (existingUser != null )
