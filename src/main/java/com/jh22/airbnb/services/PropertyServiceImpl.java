@@ -37,8 +37,8 @@ public class PropertyServiceImpl implements PropertyService{
     public Property findPropertyByTitle(String title)
     throws  ResourceNotFoundException
     {
-        return propertyrepos.findByTitle(title)
-                .orElseThrow(()-> new ResourceNotFoundException("Property Title " + title + " Not Found!");
+        return propertyrepos.findByTitle(title);
+//                .orElseThrow(()-> new ResourceNotFoundException("Property Title " + title + " Not Found!");
     }
 
     @Override
