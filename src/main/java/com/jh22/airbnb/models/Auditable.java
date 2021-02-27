@@ -29,5 +29,6 @@ abstract class Auditable {
 
     @LastModifiedBy
     protected String lastModifiedBy;
-
+// TODO CHECK INTO THE OR ELSE THROW FOR PROPERTY TITLE EXCEPTION
+    public abstract Property orElseThrow(Object o);
 }

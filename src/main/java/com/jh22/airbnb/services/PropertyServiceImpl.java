@@ -8,6 +8,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Transactional
 @Service(value = "propertyService")
 public class PropertyServiceImpl implements PropertyService{
@@ -20,4 +23,43 @@ public class PropertyServiceImpl implements PropertyService{
                 .orElseThrow(() -> new ResourceNotFoundException("Property id" + propertyid + " not Found."));
     }
 
+    @Override
+    public List<Property> findAll() {
+        List<Property> plist = new ArrayList<>();
+
+        propertyrepos.findAll()
+                .iterator()
+                .forEachRemaining(plist::add);
+        return plist;
+    }
+
+    @Override
+    public Property findPropertyByTitle(String title)
+    throws  ResourceNotFoundException
+    {
+        return propertyrepos.findByTitle(title)
+                .orElseThrow(()-> new ResourceNotFoundException("Property Title " + title + " Not Found!");
+    }
+
+    @Override
+    public Property save(Property newproperty) {
+        return null;
+    }
+
+    @Override
+    public void update(Property updateProperty, long propertyid) {
+
+    }
+
+    @Override
+    public void delete(long propertyid) {
+        propertyrepos.findById(propertyid)
+                .orElseThrow(() -> new ResourceNotFoundException("Property Id" + propertyid + "Not Found."));
+        propertyrepos.deleteById(propertyid);
+    }
+
+    @Override
+    public void deleteAll() {
+        propertyrepos.deleteAll();
+    }
 }
