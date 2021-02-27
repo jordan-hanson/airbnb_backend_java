@@ -44,7 +44,7 @@ public class PropertyController {
     @GetMapping(value = "/property/{title}", produces = "application/json")
     public ResponseEntity<?> getPropertyByUsername(@PathVariable String title)
     {
-        Property property = propertyService.findPropertyByTitle();
+        Property property = propertyService.findPropertyByTitle(title);
         return new ResponseEntity<>(property, HttpStatus.OK);
     }
 //    Add New Property

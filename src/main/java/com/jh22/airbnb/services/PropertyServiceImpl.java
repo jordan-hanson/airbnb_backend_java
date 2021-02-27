@@ -19,4 +19,5 @@ public class PropertyServiceImpl implements PropertyService{
         return propertyrepos.findById(propertyid)
                 .orElseThrow(() -> new ResourceNotFoundException("Property id" + propertyid + " not Found."));
     }
+
 }
