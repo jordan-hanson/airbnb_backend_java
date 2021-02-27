@@ -131,72 +131,72 @@ public class UserServiceImpl implements UserService{
     public void update(User updateUser, long userId)
     {
 //        TODO MODIFY TO UPDATE USER
-//        modification in process
-        //        STEP 1 VERIFY NEW USERNAME (UNIQUE = TRUE) ISN'T ON DB
-        User existingUser = userRepo.findByUsername(newuser.getUsername());
-        if (existingUser != null )
-        {
-            throw new ValidationException("User with " + newuser.getUsername() + " has already been taken.");
-        }
-
-        User newUserMade = new User();
-
-        newUserMade.setFirstname(newuser.getFirstname());
-        newUserMade.setLastname(newuser.getLastname());
-        newUserMade.setUsername(newuser.getUsername().toLowerCase());
-        newUserMade.setPrimaryemail(newuser.getPrimaryemail());
-
-//      PASSWORD OWNERPROPERTIES RENTALPROPERTIES AND ROLES
-        newUserMade.setPassword(newuser.getPassword());
-//      OWNERPROPERTIES RELATIONSHIP - CREATE SERVICES FOR PROPERTYID AND USERID IS ABOVE^ AND AUTOWIRE IN
-        newUserMade.getOwnerproperties()
-                .clear();
-        for (PropertyOwners up : newuser.getOwnerproperties())
-        {
-            Property property = new Property();
-            if (up.getProperty().getPropertyid() != 0) {
-
-                property = propertyService.findPropertyById(up.getProperty().getPropertyid());
-            } else {
-                property.setTitle(up.getProperty().getTitle());
-                property.setDescription(up.getProperty().getDescription());
-                property.setStreet(up.getProperty().getStreet());
-                property.setCity(up.getProperty().getCity());
-                property.setState(up.getProperty().getState());
-                property.setZipcode(up.getProperty().getZipcode());
-                property.setPrice(up.getProperty().getPrice());
-                property.setPictures(up.getProperty().getPictures());
-            }
-            PropertyOwners newPropertyOwner = new PropertyOwners(
-                    newUserMade,
-                    property,
-                    up.getSubstdate(),
-                    up.getSubexpdate());
-            newUserMade.getOwnerproperties().add(newPropertyOwner);
-        }
-        newUserMade.getRentproperties()
-                .clear();
-        for (PropertyRenters pr : newuser.getRentproperties())
-        {
-            Property property = propertyService.findPropertyById(pr.getProperty().getPropertyid());
-            PropertyRenters newPropertyRenters = new PropertyRenters(
-                    newUserMade,
-                    property);
-            newUserMade.getRentproperties().add(newPropertyRenters);
-        }
-        newUserMade.getRoles()
-                .clear();
-        for (UserRoles ur : newuser.getRoles())
-        {
-            Role role = roleService.findRoleById(ur.getRole().getRoleid());
-            UserRoles newUserRole = new UserRoles(
-                    newUserMade,
-                    role
-            );
-            newUserMade.getRoles().add(newUserRole);
-        }
-
-        return userRepo.save(newUserMade);
+////        modification in process
+//        //        STEP 1 VERIFY NEW USERNAME (UNIQUE = TRUE) ISN'T ON DB
+//        User existingUser = userRepo.findByUsername(newuser.getUsername());
+//        if (existingUser != null )
+//        {
+//            throw new ValidationException("User with " + newuser.getUsername() + " has already been taken.");
+//        }
+//
+//        User newUserMade = new User();
+//
+//        newUserMade.setFirstname(newuser.getFirstname());
+//        newUserMade.setLastname(newuser.getLastname());
+//        newUserMade.setUsername(newuser.getUsername().toLowerCase());
+//        newUserMade.setPrimaryemail(newuser.getPrimaryemail());
+//
+////      PASSWORD OWNERPROPERTIES RENTALPROPERTIES AND ROLES
+//        newUserMade.setPassword(newuser.getPassword());
+////      OWNERPROPERTIES RELATIONSHIP - CREATE SERVICES FOR PROPERTYID AND USERID IS ABOVE^ AND AUTOWIRE IN
+//        newUserMade.getOwnerproperties()
+//                .clear();
+//        for (PropertyOwners up : newuser.getOwnerproperties())
+//        {
+//            Property property = new Property();
+//            if (up.getProperty().getPropertyid() != 0) {
+//
+//                property = propertyService.findPropertyById(up.getProperty().getPropertyid());
+//            } else {
+//                property.setTitle(up.getProperty().getTitle());
+//                property.setDescription(up.getProperty().getDescription());
+//                property.setStreet(up.getProperty().getStreet());
+//                property.setCity(up.getProperty().getCity());
+//                property.setState(up.getProperty().getState());
+//                property.setZipcode(up.getProperty().getZipcode());
+//                property.setPrice(up.getProperty().getPrice());
+//                property.setPictures(up.getProperty().getPictures());
+//            }
+//            PropertyOwners newPropertyOwner = new PropertyOwners(
+//                    newUserMade,
+//                    property,
+//                    up.getSubstdate(),
+//                    up.getSubexpdate());
+//            newUserMade.getOwnerproperties().add(newPropertyOwner);
+//        }
+//        newUserMade.getRentproperties()
+//                .clear();
+//        for (PropertyRenters pr : newuser.getRentproperties())
+//        {
+//            Property property = propertyService.findPropertyById(pr.getProperty().getPropertyid());
+//            PropertyRenters newPropertyRenters = new PropertyRenters(
+//                    newUserMade,
+//                    property);
+//            newUserMade.getRentproperties().add(newPropertyRenters);
+//        }
+//        newUserMade.getRoles()
+//                .clear();
+//        for (UserRoles ur : newuser.getRoles())
+//        {
+//            Role role = roleService.findRoleById(ur.getRole().getRoleid());
+//            UserRoles newUserRole = new UserRoles(
+//                    newUserMade,
+//                    role
+//            );
+//            newUserMade.getRoles().add(newUserRole);
+//        }
+//
+//        return userRepo.save(newUserMade);
     }
 
     @Transactional
