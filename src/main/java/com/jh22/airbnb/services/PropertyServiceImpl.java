@@ -6,7 +6,6 @@ import com.jh22.airbnb.repositories.PropertyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,7 +39,7 @@ public class PropertyServiceImpl implements PropertyService{
         return propertyrepos.findByTitle(title);
 //                .orElseThrow(()-> new ResourceNotFoundException("Property Title " + title + " Not Found!");
     }
-
+// TODO CREATE NEW PROPERTY AND UPDATE IT.
     @Override
     public Property save(Property newproperty) {
         return null;

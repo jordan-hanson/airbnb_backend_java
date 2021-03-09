@@ -155,7 +155,7 @@ public class UserServiceImpl implements UserService{
         {
             existingUser.setPassword(updateUser.getPassword().toLowerCase());
         }
-        
+
         if (updateUser.getOwnerproperties()
                         .size() > 0)
         {
