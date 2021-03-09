@@ -154,7 +154,10 @@ public class UserServiceImpl implements UserService{
         {
             existingUser.setPrimaryemail(updateUser.getPrimaryemail().toLowerCase());
         }
-//
+        if (updateUser.getPassword() != null)
+        {
+            existingUser.setPassword(updateUser.getPassword().toLowerCase());
+        }
 ////      PASSWORD OWNERPROPERTIES RENTALPROPERTIES AND ROLES
 //        newUserMade.setPassword(newuser.getPassword());
 ////      OWNERPROPERTIES RELATIONSHIP - CREATE SERVICES FOR PROPERTYID AND USERID IS ABOVE^ AND AUTOWIRE IN
