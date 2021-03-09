@@ -128,23 +128,32 @@ public class UserServiceImpl implements UserService{
 
     @Transactional
     @Override
-    public void update(User updateUser, long userId)
+    public User update(User updateUser, long userId)
     {
 //        TODO MODIFY TO UPDATE USER
 ////        modification in process
 //        //        STEP 1 VERIFY NEW USERNAME (UNIQUE = TRUE) ISN'T ON DB
-//        User existingUser = userRepo.findByUsername(newuser.getUsername());
-//        if (existingUser != null )
-//        {
-//            throw new ValidationException("User with " + newuser.getUsername() + " has already been taken.");
-//        }
-//
-//        User newUserMade = new User();
-//
-//        newUserMade.setFirstname(newuser.getFirstname());
-//        newUserMade.setLastname(newuser.getLastname());
-//        newUserMade.setUsername(newuser.getUsername().toLowerCase());
-//        newUserMade.setPrimaryemail(newuser.getPrimaryemail());
+        User existingUser = userRepo.findByUsername(updateUser.getUsername());
+        if (existingUser != null )
+        {
+            throw new ValidationException("User with " + updateUser.getUsername() + " has already been taken.");
+        }
+        if (updateUser.getFirstname() != null)
+        {
+            existingUser.setFirstname(updateUser.getFirstname().toLowerCase());
+        }
+        if (updateUser.getLastname() != null)
+        {
+            existingUser.setLastname(updateUser.getLastname().toLowerCase());
+        }
+        if (updateUser.getUsername() != null)
+        {
+            existingUser.setUsername(updateUser.getUsername().toLowerCase());
+        }
+        if (updateUser.getPrimaryemail() != null)
+        {
+            existingUser.setPrimaryemail(updateUser.getPrimaryemail().toLowerCase());
+        }
 //
 ////      PASSWORD OWNERPROPERTIES RENTALPROPERTIES AND ROLES
 //        newUserMade.setPassword(newuser.getPassword());
