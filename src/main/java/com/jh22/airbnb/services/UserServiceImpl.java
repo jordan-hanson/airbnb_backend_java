@@ -133,11 +133,8 @@ public class UserServiceImpl implements UserService{
 //        TODO MODIFY TO UPDATE USER
 ////        modification in process
 //        //        STEP 1 VERIFY NEW USERNAME (UNIQUE = TRUE) ISN'T ON DB
-        User existingUser = userRepo.findByUsername(updateUser.getUsername());
-        if (existingUser != null )
-        {
-            throw new ValidationException("User with " + updateUser.getUsername() + " has already been taken.");
-        }
+        User existingUser = findUserById(userId);
+
         if (updateUser.getFirstname() != null)
         {
             existingUser.setFirstname(updateUser.getFirstname().toLowerCase());
@@ -158,57 +155,43 @@ public class UserServiceImpl implements UserService{
         {
             existingUser.setPassword(updateUser.getPassword().toLowerCase());
         }
-////      PASSWORD OWNERPROPERTIES RENTALPROPERTIES AND ROLES
-//        newUserMade.setPassword(newuser.getPassword());
-////      OWNERPROPERTIES RELATIONSHIP - CREATE SERVICES FOR PROPERTYID AND USERID IS ABOVE^ AND AUTOWIRE IN
-//        newUserMade.getOwnerproperties()
-//                .clear();
-//        for (PropertyOwners up : newuser.getOwnerproperties())
-//        {
-//            Property property = new Property();
-//            if (up.getProperty().getPropertyid() != 0) {
-//
-//                property = propertyService.findPropertyById(up.getProperty().getPropertyid());
-//            } else {
-//                property.setTitle(up.getProperty().getTitle());
-//                property.setDescription(up.getProperty().getDescription());
-//                property.setStreet(up.getProperty().getStreet());
-//                property.setCity(up.getProperty().getCity());
-//                property.setState(up.getProperty().getState());
-//                property.setZipcode(up.getProperty().getZipcode());
-//                property.setPrice(up.getProperty().getPrice());
-//                property.setPictures(up.getProperty().getPictures());
-//            }
-//            PropertyOwners newPropertyOwner = new PropertyOwners(
-//                    newUserMade,
-//                    property,
-//                    up.getSubstdate(),
-//                    up.getSubexpdate());
-//            newUserMade.getOwnerproperties().add(newPropertyOwner);
-//        }
-//        newUserMade.getRentproperties()
-//                .clear();
-//        for (PropertyRenters pr : newuser.getRentproperties())
-//        {
-//            Property property = propertyService.findPropertyById(pr.getProperty().getPropertyid());
-//            PropertyRenters newPropertyRenters = new PropertyRenters(
-//                    newUserMade,
-//                    property);
-//            newUserMade.getRentproperties().add(newPropertyRenters);
-//        }
-//        newUserMade.getRoles()
-//                .clear();
-//        for (UserRoles ur : newuser.getRoles())
-//        {
-//            Role role = roleService.findRoleById(ur.getRole().getRoleid());
-//            UserRoles newUserRole = new UserRoles(
-//                    newUserMade,
-//                    role
-//            );
-//            newUserMade.getRoles().add(newUserRole);
-//        }
-//
-//        return userRepo.save(newUserMade);
+        
+        if (updateUser.getOwnerproperties()
+                        .size() > 0)
+        {
+            existingUser.getOwnerproperties()
+                        .clear();
+            for (PropertyOwners po : updateUser.getOwnerproperties())
+            {
+                existingUser.getOwnerproperties()
+                        .add( new PropertyOwners(existingUser, po.getProperty(), po.getSubstdate(), po.getSubexpdate()));
+            }
+        }
+        if (updateUser.getRentproperties()
+                        .size() > 0)
+        {
+            existingUser.getRentproperties()
+                        .clear();
+            for (PropertyRenters pr : updateUser.getRentproperties())
+            {
+                existingUser.getRentproperties()
+                        .add( new PropertyRenters(existingUser, pr.getProperty()));
+            }
+        }
+        if (updateUser.getRoles()
+                    .size() > 0)
+        {
+            existingUser.getRoles()
+                        .clear();
+            for (UserRoles ur: updateUser.getRoles())
+            {
+                Role addRole = roleService.findRoleById(ur.getRole().getRoleid());
+
+                existingUser.getRoles()
+                        .add(new UserRoles(existingUser, addRole));
+            }
+        }
+        return userRepo.save(existingUser);
     }
 
     @Transactional
