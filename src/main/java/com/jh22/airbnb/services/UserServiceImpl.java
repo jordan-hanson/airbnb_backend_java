@@ -2,9 +2,7 @@ package com.jh22.airbnb.services;
 
 import com.jh22.airbnb.exceptions.ResourceNotFoundException;
 import com.jh22.airbnb.models.*;
-import com.jh22.airbnb.repositories.PropertyOwnersRepository;
-import com.jh22.airbnb.repositories.PropertyRentersRepository;
-import com.jh22.airbnb.repositories.UserRepository;
+import com.jh22.airbnb.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -33,6 +31,11 @@ public class UserServiceImpl implements UserService{
     @Autowired
     private PropertyRentersRepository renterRepo;
 
+    @Autowired
+    private RoleRepository roleRepo;
+
+    @Autowired
+    private UserRolesRepository userRoleRepo;
     @Override
     public List<User> findAll() {
         List<User> list = new ArrayList<>();
@@ -196,10 +199,11 @@ public class UserServiceImpl implements UserService{
                         .clear();
             for (UserRoles ur: updateUser.getRoles())
             {
-                Role addRole = roleService.findRoleById(ur.getRole().getRoleid());
+                UserRoles addRole = userRoleRepo.findById(ur.getRole().getRoleid())
+                        .orElseThrow(() -> new EntityNotFoundException("Role id" + ur.getRole().getRoleid()));
 
                 existingUser.getRoles()
-                        .add(new UserRoles(existingUser, addRole));
+                        .add(addRole);
             }
         }
         return userRepo.save(existingUser);
