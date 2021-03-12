@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,9 +41,18 @@ public class PropertyServiceImpl implements PropertyService{
 //                .orElseThrow(()-> new ResourceNotFoundException("Property Title " + title + " Not Found!");
     }
 // TODO CREATE NEW PROPERTY AND UPDATE IT.
+    @Transactional
     @Override
     public Property save(Property newproperty) {
-        return null;
+        Property saveProperty = new Property();
+
+        if(newproperty.getPropertyid() !=0)
+        {
+            propertyrepos.findById(newproperty.getPropertyid())
+                    .orElseThrow(() -> new EntityNotFoundException("Property " + newproperty.getPropertyid() + "Not Found."));
+            saveProperty.setPropertyid(newproperty.getPropertyid());
+        }
+        
     }
 
     @Override
