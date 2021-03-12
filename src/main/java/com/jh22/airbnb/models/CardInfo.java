@@ -7,7 +7,7 @@ import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "cards")
-public class CardInfo extends Auditable{
+public class CardInfo{
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

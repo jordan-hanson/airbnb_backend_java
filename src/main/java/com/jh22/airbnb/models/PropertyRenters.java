@@ -10,7 +10,7 @@ import java.io.Serializable;
 @Entity
 @Table(name = "propertyrenters")
 @IdClass(PropertyRentersId.class)
-public class PropertyRenters extends Auditable implements Serializable {
+public class PropertyRenters implements Serializable {
 
     @Id
     @ManyToOne

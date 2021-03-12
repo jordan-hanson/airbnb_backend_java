@@ -9,7 +9,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "properties")
-public class Property extends Auditable{
+public class Property{
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

@@ -10,7 +10,7 @@ import java.util.Date;
 @Entity
 @Table(name = "propertyowners")
 @IdClass(PropertyOwnersId.class)
-public class PropertyOwners extends Auditable implements Serializable {
+public class PropertyOwners implements Serializable {
     @Id
     @ManyToOne
     @NotNull
