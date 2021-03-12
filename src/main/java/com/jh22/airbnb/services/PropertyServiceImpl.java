@@ -2,6 +2,8 @@ package com.jh22.airbnb.services;
 
 import com.jh22.airbnb.exceptions.ResourceNotFoundException;
 import com.jh22.airbnb.models.Property;
+import com.jh22.airbnb.models.PropertyOwners;
+import com.jh22.airbnb.repositories.PropertyOwnersRepository;
 import com.jh22.airbnb.repositories.PropertyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,6 +18,9 @@ import java.util.List;
 public class PropertyServiceImpl implements PropertyService{
     @Autowired
     private PropertyRepository propertyrepos;
+
+    @Autowired
+    private PropertyOwnersRepository prownRepo;
 
     @Override
     public Property findPropertyById(long propertyid) {
@@ -65,7 +70,9 @@ public class PropertyServiceImpl implements PropertyService{
 //        saveProperty.setZipcode(newproperty.getZipcode());
 //        saveProperty.setPrice(newproperty.getPrice());
         saveProperty.setPictures(newproperty.getPictures());
-        
+
+//        Collections
+    
 
     }
 
