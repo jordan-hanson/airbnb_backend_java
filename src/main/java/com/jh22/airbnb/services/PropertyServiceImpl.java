@@ -52,7 +52,21 @@ public class PropertyServiceImpl implements PropertyService{
                     .orElseThrow(() -> new EntityNotFoundException("Property " + newproperty.getPropertyid() + "Not Found."));
             saveProperty.setPropertyid(newproperty.getPropertyid());
         }
+//        For Primitive Data Types/ Strings
+        saveProperty.setTitle(newproperty.getTitle());
+        saveProperty.setDescription(newproperty.getDescription());
+        saveProperty.setStreet(newproperty.getStreet());
+        saveProperty.setCity(newproperty.getCity());
+        saveProperty.setState(newproperty.getState());
+
+//        TODO Ask Jeff or reserach the data types with save
+//        Do I need to make a boolean and Jsonignoreproperties for zipcode and price?
+
+//        saveProperty.setZipcode(newproperty.getZipcode());
+//        saveProperty.setPrice(newproperty.getPrice());
+        saveProperty.setPictures(newproperty.getPictures());
         
+
     }
 
     @Override
