@@ -2,11 +2,14 @@ package com.jh22.airbnb.services;
 
 import com.jh22.airbnb.exceptions.ResourceNotFoundException;
 import com.jh22.airbnb.models.*;
+import com.jh22.airbnb.repositories.PropertyOwnersRepository;
+import com.jh22.airbnb.repositories.PropertyRentersRepository;
 import com.jh22.airbnb.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityNotFoundException;
 import javax.validation.ValidationException;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +26,12 @@ public class UserServiceImpl implements UserService{
 
     @Autowired
     private PropertyService propertyService;
+
+    @Autowired
+    private PropertyOwnersRepository prownRepo;
+
+    @Autowired
+    private PropertyRentersRepository renterRepo;
 
     @Override
     public List<User> findAll() {
@@ -131,9 +140,8 @@ public class UserServiceImpl implements UserService{
     public User update(User updateUser, long userId)
     {
 //        TODO MODIFY TO UPDATE USER
-////        modification in process
-//        //        STEP 1 VERIFY NEW USERNAME (UNIQUE = TRUE) ISN'T ON DB
-        User existingUser = findUserById(userId);
+        User existingUser = userRepo.findById(userId)
+                .orElseThrow(() -> new EntityNotFoundException("User" + userId + "Not Found!"));
 
         if (updateUser.getFirstname() != null)
         {
@@ -163,8 +171,10 @@ public class UserServiceImpl implements UserService{
                         .clear();
             for (PropertyOwners po : updateUser.getOwnerproperties())
             {
-                existingUser.getOwnerproperties()
-                        .add( new PropertyOwners(existingUser, po.getProperty(), po.getSubstdate(), po.getSubexpdate()));
+//                TODO MAKE SURE I DID THIS LINE RIGHT WITH PO.GETOWNER().GETUSERID()
+                PropertyOwners newOwner = prownRepo.findById(po.getOwner().getUserid())
+                        .orElseThrow(() -> new EntityNotFoundException("Property Owner" + po.getOwner().getUserid() + "Not found!"));
+                existingUser.getOwnerproperties().add(newOwner);
             }
         }
         if (updateUser.getRentproperties()
@@ -174,8 +184,9 @@ public class UserServiceImpl implements UserService{
                         .clear();
             for (PropertyRenters pr : updateUser.getRentproperties())
             {
-                existingUser.getRentproperties()
-                        .add( new PropertyRenters(existingUser, pr.getProperty()));
+                PropertyRenters newRenter = renterRepo.findById(pr.getRenter().getUserid())
+                        .orElseThrow(() -> new EntityNotFoundException("Property Renter" + pr.getRenter().getUserid() + "Not Found."));
+                existingUser.getRentproperties().add(newRenter);
             }
         }
         if (updateUser.getRoles()
