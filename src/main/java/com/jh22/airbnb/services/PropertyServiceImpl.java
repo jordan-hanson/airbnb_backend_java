@@ -72,8 +72,9 @@ public class PropertyServiceImpl implements PropertyService{
         saveProperty.setPictures(newproperty.getPictures());
 
 //        Collections
-    
+//        saveProperty.getOwner()
 
+        return propertyrepos.save(saveProperty);
     }
 
     @Override
