@@ -65,7 +65,7 @@ public class PropertyServiceImpl implements PropertyService{
         saveProperty.setCity(newproperty.getCity());
         saveProperty.setState(newproperty.getState());
 
-//        TODO Ask Jeff or reserach the data types with save
+//        TODO Ask Jeff or research the data types with save
 //        Do I need to make a boolean and Jsonignoreproperties for zipcode and price?
 
 //        saveProperty.setZipcode(newproperty.getZipcode());
