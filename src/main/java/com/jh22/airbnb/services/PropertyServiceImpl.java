@@ -74,7 +74,10 @@ public class PropertyServiceImpl implements PropertyService{
 
 //        Collections
         saveProperty.getOwner().clear();
-        for(User pr: PropertyOwners.getOwner())
+        for(PropertyOwners po: PropertyOwners.getOwner())
+        {
+            
+        }
         return propertyrepos.save(saveProperty);
     }
 
