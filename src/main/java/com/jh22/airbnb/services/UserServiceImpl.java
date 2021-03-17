@@ -174,7 +174,6 @@ public class UserServiceImpl implements UserService{
                         .clear();
             for (PropertyOwners po : updateUser.getOwnerproperties())
             {
-//                TODO MAKE SURE I DID THIS LINE RIGHT WITH PO.GETOWNER().GETUSERID()
                 PropertyOwners newOwner = prownRepo.findById(po.getOwner().getUserid())
                         .orElseThrow(() -> new EntityNotFoundException("Property Owner" + po.getOwner().getUserid() + "Not found!"));
                 existingUser.getOwnerproperties().add(newOwner);

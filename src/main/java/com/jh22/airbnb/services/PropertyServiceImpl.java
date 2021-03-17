@@ -3,6 +3,7 @@ package com.jh22.airbnb.services;
 import com.jh22.airbnb.exceptions.ResourceNotFoundException;
 import com.jh22.airbnb.models.Property;
 import com.jh22.airbnb.models.PropertyOwners;
+import com.jh22.airbnb.models.PropertyRenters;
 import com.jh22.airbnb.models.User;
 import com.jh22.airbnb.repositories.PropertyOwnersRepository;
 import com.jh22.airbnb.repositories.PropertyRepository;
@@ -68,9 +69,9 @@ public class PropertyServiceImpl implements PropertyService{
         saveProperty.setCity(newproperty.getCity());
         saveProperty.setState(newproperty.getState());
 
-//        TODO Ask Jeff or research the data types with save
 //        Do I need to make a boolean and Jsonignoreproperties for zipcode and price?
-
+//        Answer: Yes, If I am requiring them to have it in my form. YOu don't have to if it defaults to a Zero.
+//        TODO update jsonignoreproperties on required non string fields.
 //        saveProperty.setZipcode(newproperty.getZipcode());
 //        saveProperty.setPrice(newproperty.getPrice());
         saveProperty.setPictures(newproperty.getPictures());
@@ -87,12 +88,50 @@ public class PropertyServiceImpl implements PropertyService{
             propertyOwner.setSubexpdate(po.getSubexpdate());
             saveProperty.getOwner().add(propertyOwner);
         }
+        saveProperty.getRenters().clear();
+
         return propertyrepos.save(saveProperty);
     }
 
     @Override
-    public void update(Property updateProperty, long propertyid) {
+    @Transactional
+    public void update(Property updateProperty, long propertyid)
+    {
+        Property currentProperty = propertyrepos.findById(propertyid)
+                .orElseThrow(() -> new EntityNotFoundException("Property" + propertyid + "Not Found!"));
 
+//        For Primitive Data Types/ Strings
+        if(updateProperty.getTitle() != null)
+        {
+            
+        }
+        saveProperty.setDescription(newproperty.getDescription());
+        saveProperty.setStreet(newproperty.getStreet());
+        saveProperty.setCity(newproperty.getCity());
+        saveProperty.setState(newproperty.getState());
+
+//        Do I need to make a boolean and Jsonignoreproperties for zipcode and price?
+//        Answer: Yes, If I am requiring them to have it in my form. YOu don't have to if it defaults to a Zero.
+//        TODO update jsonignoreproperties on required non string fields.
+//        saveProperty.setZipcode(newproperty.getZipcode());
+//        saveProperty.setPrice(newproperty.getPrice());
+        saveProperty.setPictures(newproperty.getPictures());
+
+//        Collections
+        saveProperty.getOwner().clear();
+        for(PropertyOwners po: newproperty.getOwner())
+        {
+            User newOwner = userService.findUserById(po.getOwner().getUserid());
+            PropertyOwners propertyOwner = new PropertyOwners();
+            propertyOwner.setProperty(saveProperty);
+            propertyOwner.setOwner(newOwner);
+            propertyOwner.setSubstdate(po.getSubstdate());
+            propertyOwner.setSubexpdate(po.getSubexpdate());
+            saveProperty.getOwner().add(propertyOwner);
+        }
+        saveProperty.getRenters().clear();
+
+        return propertyrepos.save(saveProperty);
     }
 
     @Override
