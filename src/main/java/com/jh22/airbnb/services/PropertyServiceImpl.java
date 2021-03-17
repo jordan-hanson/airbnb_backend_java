@@ -23,6 +23,9 @@ public class PropertyServiceImpl implements PropertyService{
     @Autowired
     private PropertyOwnersRepository prownRepo;
 
+    @Autowired
+    private UserService userService;
+
     @Override
     public Property findPropertyById(long propertyid) {
         return propertyrepos.findById(propertyid)
@@ -74,9 +77,15 @@ public class PropertyServiceImpl implements PropertyService{
 
 //        Collections
         saveProperty.getOwner().clear();
-        for(PropertyOwners po: PropertyOwners.getOwner())
+        for(PropertyOwners po: newproperty.getOwner())
         {
-            
+            User newOwner = userService.findUserById(po.getOwner().getUserid());
+            PropertyOwners propertyOwner = new PropertyOwners();
+            propertyOwner.setProperty(saveProperty);
+            propertyOwner.setOwner(newOwner);
+            propertyOwner.setSubstdate(po.getSubstdate());
+            propertyOwner.setSubexpdate(po.getSubexpdate());
+            saveProperty.getOwner().add(propertyOwner);
         }
         return propertyrepos.save(saveProperty);
     }
