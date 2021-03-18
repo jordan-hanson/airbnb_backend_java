@@ -9,6 +9,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "properties")
+@JsonIgnoreProperties(value = {"hasvalueforzipcode", "hasvalueforprice"})
 public class Property{
 
     @Id
@@ -31,11 +32,17 @@ public class Property{
     @NotNull
     private String state;
 
+//    This was added to specifically show how to update fields that do not have a NULL value (integers, doubles)
+//    @Transient is only for Java and do not save to the DB
     @NotNull
     private Integer zipcode;
+    @Transient
+    public boolean hasvalueforzipcode = false;
 
     @NotNull
     private Double price;
+    @Transient
+    public boolean hasvalueforprice = false;
 
     @NotNull
     private String pictures;
@@ -128,6 +135,7 @@ public class Property{
     }
 
     public void setZipcode(Integer zipcode) {
+        hasvalueforzipcode = true;
         this.zipcode = zipcode;
     }
 
@@ -136,6 +144,7 @@ public class Property{
     }
 
     public void setPrice(Double price) {
+        hasvalueforprice = true;
         this.price = price;
     }
 

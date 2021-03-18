@@ -71,9 +71,8 @@ public class PropertyServiceImpl implements PropertyService{
 
 //        Do I need to make a boolean and Jsonignoreproperties for zipcode and price?
 //        Answer: Yes, If I am requiring them to have it in my form. YOu don't have to if it defaults to a Zero.
-//        TODO update jsonignoreproperties on required non string fields.
-//        saveProperty.setZipcode(newproperty.getZipcode());
-//        saveProperty.setPrice(newproperty.getPrice());
+        saveProperty.setZipcode(newproperty.getZipcode());
+        saveProperty.setPrice(newproperty.getPrice());
         saveProperty.setPictures(newproperty.getPictures());
 
 //        Collections
@@ -103,7 +102,7 @@ public class PropertyServiceImpl implements PropertyService{
 //        For Primitive Data Types/ Strings
         if(updateProperty.getTitle() != null)
         {
-            
+
         }
         saveProperty.setDescription(newproperty.getDescription());
         saveProperty.setStreet(newproperty.getStreet());
@@ -114,6 +113,10 @@ public class PropertyServiceImpl implements PropertyService{
 //        Answer: Yes, If I am requiring them to have it in my form. YOu don't have to if it defaults to a Zero.
 //        TODO update jsonignoreproperties on required non string fields.
 //        saveProperty.setZipcode(newproperty.getZipcode());
+        if(updateProperty.hasvalueforzipcode)
+        {
+            currentProperty.setZipcode(updateProperty.getZipcode());
+        }
 //        saveProperty.setPrice(newproperty.getPrice());
         saveProperty.setPictures(newproperty.getPictures());
 
