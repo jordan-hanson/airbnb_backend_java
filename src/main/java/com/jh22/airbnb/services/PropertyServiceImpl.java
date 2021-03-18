@@ -3,7 +3,6 @@ package com.jh22.airbnb.services;
 import com.jh22.airbnb.exceptions.ResourceNotFoundException;
 import com.jh22.airbnb.models.Property;
 import com.jh22.airbnb.models.PropertyOwners;
-import com.jh22.airbnb.models.PropertyRenters;
 import com.jh22.airbnb.models.User;
 import com.jh22.airbnb.repositories.PropertyOwnersRepository;
 import com.jh22.airbnb.repositories.PropertyRepository;
@@ -126,7 +125,6 @@ public class PropertyServiceImpl implements PropertyService{
         {
             currentProperty.setZipcode(updateProperty.getZipcode());
         }
-//        saveProperty.setPrice(newproperty.getPrice());
         if(updateProperty.hasvalueforprice)
         {
             currentProperty.setPrice(updateProperty.getPrice());
@@ -141,16 +139,16 @@ public class PropertyServiceImpl implements PropertyService{
         {
             currentProperty.getOwner().clear();
 
-        for(PropertyOwners po: updateProperty.getOwner())
-        {
-            User newOwner = userService.findUserById(po.getOwner().getUserid());
-            PropertyOwners propertyOwner = new PropertyOwners();
-            propertyOwner.setProperty(currentProperty);
-            propertyOwner.setOwner(newOwner);
-            propertyOwner.setSubstdate(po.getSubstdate());
-            propertyOwner.setSubexpdate(po.getSubexpdate());
-            currentProperty.getOwner().add(propertyOwner);
-        }
+            for(PropertyOwners po: updateProperty.getOwner())
+            {
+                User newOwner = userService.findUserById(po.getOwner().getUserid());
+                PropertyOwners propertyOwner = new PropertyOwners();
+                propertyOwner.setProperty(currentProperty);
+                propertyOwner.setOwner(newOwner);
+                propertyOwner.setSubstdate(po.getSubstdate());
+                propertyOwner.setSubexpdate(po.getSubexpdate());
+                currentProperty.getOwner().add(propertyOwner);
+            }
         }
         currentProperty.getRenters().clear();
 

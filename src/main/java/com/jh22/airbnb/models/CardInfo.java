@@ -1,13 +1,11 @@
 package com.jh22.airbnb.models;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "cards")
-public class CardInfo{
+public class CardInfo extends Auditable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

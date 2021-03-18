@@ -10,7 +10,7 @@ import java.util.Set;
 @Entity
 @Table(name = "properties")
 @JsonIgnoreProperties(value = {"hasvalueforzipcode", "hasvalueforprice"})
-public class Property{
+public class Property extends Auditable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
