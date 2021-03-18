@@ -28,4 +28,19 @@ public class CardServiceImpl implements CardService{
     public CardInfo save(CardInfo newCard) {
         return null;
     }
+
+    @Override
+    public CardInfo findCardById(long cardId) {
+        return null;
+    }
+
+    @Override
+    public CardInfo update(CardInfo updateCard, long cardId) {
+        return null;
+    }
+
+    @Override
+    public void delete(long cardId) {
+
+    }
 }
