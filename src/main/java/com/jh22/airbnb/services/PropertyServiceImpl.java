@@ -94,7 +94,7 @@ public class PropertyServiceImpl implements PropertyService{
 
     @Override
     @Transactional
-    public void update(Property updateProperty, long propertyid)
+    public Property update(Property updateProperty, long propertyid)
     {
         Property currentProperty = propertyrepos.findById(propertyid)
                 .orElseThrow(() -> new EntityNotFoundException("Property" + propertyid + "Not Found!"));

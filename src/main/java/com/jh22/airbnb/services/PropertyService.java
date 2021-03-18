@@ -14,7 +14,7 @@ public interface PropertyService {
 
     Property save(Property newproperty);
 
-    void update(Property updateProperty, long propertyid);
+    Property update(Property updateProperty, long propertyid);
 
     void delete(long propertyid);
 
