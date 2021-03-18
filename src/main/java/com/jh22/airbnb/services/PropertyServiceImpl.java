@@ -102,39 +102,59 @@ public class PropertyServiceImpl implements PropertyService{
 //        For Primitive Data Types/ Strings
         if(updateProperty.getTitle() != null)
         {
-
+            currentProperty.setTitle(updateProperty.getTitle());
         }
-        saveProperty.setDescription(newproperty.getDescription());
-        saveProperty.setStreet(newproperty.getStreet());
-        saveProperty.setCity(newproperty.getCity());
-        saveProperty.setState(newproperty.getState());
-
+        if(updateProperty.getDescription() != null)
+        {
+            currentProperty.setDescription(updateProperty.getDescription());
+        }
+        if(updateProperty.getStreet() != null)
+        {
+            currentProperty.setStreet(updateProperty.getStreet());
+        }
+        if(updateProperty.getCity() != null)
+        {
+            currentProperty.setCity(updateProperty.getCity());
+        }
+        if(updateProperty.getState() != null)
+        {
+            currentProperty.setState(updateProperty.getState());
+        }
 //        Do I need to make a boolean and Jsonignoreproperties for zipcode and price?
-//        Answer: Yes, If I am requiring them to have it in my form. YOu don't have to if it defaults to a Zero.
-//        TODO update jsonignoreproperties on required non string fields.
-//        saveProperty.setZipcode(newproperty.getZipcode());
+//        Answer: Yes, If I am requiring them to have it in my form. You don't have to if it defaults to a Zero.
         if(updateProperty.hasvalueforzipcode)
         {
             currentProperty.setZipcode(updateProperty.getZipcode());
         }
 //        saveProperty.setPrice(newproperty.getPrice());
-        saveProperty.setPictures(newproperty.getPictures());
+        if(updateProperty.hasvalueforprice)
+        {
+            currentProperty.setPrice(updateProperty.getPrice());
+        }
+        if(updateProperty.getPictures() != null)
+        {
+            currentProperty.setPictures(updateProperty.getPictures());
+        }
+//        Collection Owner - One to Many
+//        Collections are a complete replace
+        if(updateProperty.getOwner().size() > 0)
+        {
+            currentProperty.getOwner().clear();
 
-//        Collections
-        saveProperty.getOwner().clear();
-        for(PropertyOwners po: newproperty.getOwner())
+        for(PropertyOwners po: updateProperty.getOwner())
         {
             User newOwner = userService.findUserById(po.getOwner().getUserid());
             PropertyOwners propertyOwner = new PropertyOwners();
-            propertyOwner.setProperty(saveProperty);
+            propertyOwner.setProperty(currentProperty);
             propertyOwner.setOwner(newOwner);
             propertyOwner.setSubstdate(po.getSubstdate());
             propertyOwner.setSubexpdate(po.getSubexpdate());
-            saveProperty.getOwner().add(propertyOwner);
+            currentProperty.getOwner().add(propertyOwner);
         }
-        saveProperty.getRenters().clear();
+        }
+        currentProperty.getRenters().clear();
 
-        return propertyrepos.save(saveProperty);
+        return propertyrepos.save(currentProperty);
     }
 
     @Override
