@@ -24,4 +24,8 @@ public class CardServiceImpl implements CardService{
         return list;
     }
 
+    @Override
+    public CardInfo save(CardInfo newCard) {
+        return null;
+    }
 }

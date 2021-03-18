@@ -11,7 +11,6 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
 import java.net.URI;
-import java.net.URISyntaxException;
 import java.util.List;
 
 @RestController
@@ -48,7 +47,7 @@ public class UserController {
 //    Add New User
 //    http://localhost:2019/users/user
     @PostMapping(value = "/user", consumes = "application/json")
-    public ResponseEntity<?> addNewUser(@Valid @RequestBody User newuser) throws URISyntaxException
+    public ResponseEntity<?> addNewUser(@Valid @RequestBody User newuser)
     {
 //      Set User id
         newuser.setUserid(0);
