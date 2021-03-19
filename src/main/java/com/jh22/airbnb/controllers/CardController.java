@@ -42,11 +42,11 @@ public class CardController {
     }
 //    Save New Card
 //    http://localhost:2019/cards/card
-    @PostMapping(value = "/card", consumes = "application/json")
-    public ResponseEntity<?> addNewCard(@Valid @RequestBody CardInfo newCard)
+    @PostMapping(value = "/card/user/{userid}", consumes = "application/json")
+    public ResponseEntity<?> addNewCard(@Valid @RequestBody CardInfo newCard, @PathVariable long userid)
     {
         newCard.setCardid(0);
-        newCard = cardService.save(newCard);
+        newCard = cardService.save(newCard, userid);
 
         HttpHeaders responseHeaders = new HttpHeaders();
         URI newCardURI = ServletUriComponentsBuilder.fromCurrentRequest()

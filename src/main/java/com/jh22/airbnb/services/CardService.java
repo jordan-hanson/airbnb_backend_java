@@ -8,8 +8,7 @@ public interface CardService {
 
     List<CardInfo> findAll();
 
-    CardInfo save(CardInfo newCard);
-
+    CardInfo save(CardInfo newCard, long userid);
 
     CardInfo findCardById(long cardId);
 

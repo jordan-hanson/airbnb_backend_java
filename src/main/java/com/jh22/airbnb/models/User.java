@@ -57,6 +57,13 @@ public class User extends Auditable{
     allowSetters = true)
     private Set<UserRoles> roles = new HashSet<>();
 
+    @OneToMany(mappedBy = "user",
+    cascade = CascadeType.ALL,
+    orphanRemoval = true)
+    @JsonIgnoreProperties(value = "user",
+    allowSetters = true)
+    private Set<CardInfo> cards = new HashSet<>();
+
     public User() {
     }
 
@@ -138,5 +145,13 @@ public class User extends Auditable{
 
     public void setRoles(Set<UserRoles> roles) {
         this.roles = roles;
+    }
+
+    public Set<CardInfo> getCards() {
+        return cards;
+    }
+
+    public void setCards(Set<CardInfo> cards) {
+        this.cards = cards;
     }
 }

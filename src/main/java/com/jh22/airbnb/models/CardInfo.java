@@ -35,6 +35,12 @@ public class CardInfo extends Auditable{
     @Transient
     public boolean hasvalueforsecuritycode = false;
 
+    @ManyToOne
+    @JoinColumn(name = "userid",
+    nullable = false)
+    @JsonIgnoreProperties(value = "cards", allowSetters = true)
+    private User user;
+
     public CardInfo() {
     }
 
@@ -42,13 +48,15 @@ public class CardInfo extends Auditable{
                     @NotNull String number,
                     @NotNull String type,
                     @NotNull Integer expdate,
-                    @NotNull Integer securitycode)
+                    @NotNull Integer securitycode,
+                    @NotNull User user)
     {
         this.name = name;
         this.number = number;
         this.type = type;
         this.expdate = expdate;
         this.securitycode = securitycode;
+        this.user = user;
     }
 
     public long getCardid() {
@@ -99,5 +107,13 @@ public class CardInfo extends Auditable{
     public void setSecuritycode(Integer securitycode) {
         hasvalueforsecuritycode = true;
         this.securitycode = securitycode;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

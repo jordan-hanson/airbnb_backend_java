@@ -2,6 +2,7 @@ package com.jh22.airbnb.services;
 
 import com.jh22.airbnb.exceptions.ResourceNotFoundException;
 import com.jh22.airbnb.models.CardInfo;
+import com.jh22.airbnb.models.User;
 import com.jh22.airbnb.repositories.CardRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,6 +18,8 @@ public class CardServiceImpl implements CardService{
     @Autowired
     private CardRepository cardrepos;
 
+    @Autowired
+    private UserService userService;
     @Override
     public List<CardInfo> findAll() {
         List<CardInfo> list = new ArrayList<>();
@@ -27,9 +30,12 @@ public class CardServiceImpl implements CardService{
     }
     @Transactional
     @Override
-    public CardInfo save(CardInfo newCard) {
+    public CardInfo save(CardInfo newCard, long userid) {
+
+        User user = userService.findUserById(userid);
 
         CardInfo saveCard = new CardInfo();
+        saveCard.setUser(user);
 
         if(newCard.getCardid() != 0)
         {
@@ -39,7 +45,7 @@ public class CardServiceImpl implements CardService{
         saveCard.setName(newCard.getName());
         saveCard.setNumber(newCard.getNumber());
         saveCard.setType(newCard.getType());
-//        TODO CONTINUE WORKING ON THIS AFTER THE RELATIONSHIP CARD USER 
+
         return cardrepos.save(saveCard);
     }
 
@@ -52,12 +58,39 @@ public class CardServiceImpl implements CardService{
     }
 
     @Override
-    public CardInfo update(CardInfo updateCard, long cardId) {
-        return null;
+    public CardInfo update(CardInfo updateCard, long userid)
+    {
+        CardInfo currentCard = findCardById(updateCard.getCardid());
+        User user = userService.findUserById(userid);
+        currentCard.setUser(user);
+
+        if(updateCard.getName() != null)
+        {
+            currentCard.setName(updateCard.getName());
+        }
+        if(updateCard.getNumber() != null)
+        {
+            currentCard.setNumber(updateCard.getNumber());
+        }
+        if(updateCard.getType() != null)
+        {
+            currentCard.setType(updateCard.getType());
+        }
+        if(updateCard.hasvalueforexpdate)
+        {
+            currentCard.setExpdate(updateCard.getExpdate());
+        }
+        if(updateCard.hasvalueforsecuritycode)
+        {
+            currentCard.setSecuritycode(updateCard.getSecuritycode());
+        }
+        return cardrepos.save(currentCard);
     }
 
     @Override
-    public void delete(long cardId) {
-
+    public void delete(long cardId)
+    {
+        cardrepos.findById(cardId);
+        cardrepos.deleteById(cardId);
     }
 }
