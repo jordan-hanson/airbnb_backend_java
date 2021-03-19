@@ -1,10 +1,13 @@
 package com.jh22.airbnb.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "cards")
+@JsonIgnoreProperties(value = {"hasvalueforexpdate", "hasvalueforsecuritycode"})
 public class CardInfo extends Auditable{
 
     @Id
@@ -24,9 +27,13 @@ public class CardInfo extends Auditable{
 
     @NotNull
     private Integer expdate;
+    @Transient
+    public boolean hasvalueforexpdate = false;
 
     @NotNull
     private Integer securitycode;
+    @Transient
+    public boolean hasvalueforsecuritycode = false;
 
     public CardInfo() {
     }
@@ -81,6 +88,7 @@ public class CardInfo extends Auditable{
     }
 
     public void setExpdate(Integer expdate) {
+        hasvalueforexpdate = true;
         this.expdate = expdate;
     }
 
@@ -89,6 +97,7 @@ public class CardInfo extends Auditable{
     }
 
     public void setSecuritycode(Integer securitycode) {
+        hasvalueforsecuritycode = true;
         this.securitycode = securitycode;
     }
 }

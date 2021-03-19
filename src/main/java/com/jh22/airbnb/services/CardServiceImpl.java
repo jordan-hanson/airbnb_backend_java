@@ -31,7 +31,16 @@ public class CardServiceImpl implements CardService{
 
         CardInfo saveCard = new CardInfo();
 
-        CardInfo
+        if(newCard.getCardid() != 0)
+        {
+            cardrepos.findById(newCard.getCardid());
+            saveCard.setCardid(newCard.getCardid());
+        }
+        saveCard.setName(newCard.getName());
+        saveCard.setNumber(newCard.getNumber());
+        saveCard.setType(newCard.getType());
+//        TODO CONTINUE WORKING ON THIS AFTER THE RELATIONSHIP CARD USER 
+        return cardrepos.save(saveCard);
     }
 
     @Override
