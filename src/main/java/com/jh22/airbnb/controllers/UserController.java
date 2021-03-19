@@ -82,6 +82,7 @@ public class UserController {
     public ResponseEntity<?> deleteUser(@PathVariable long userId)
     {
         userService.delete(userId);
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
+//    Use NO_CONTENT to see a 204 and a 1 back to see it worked.
 }
