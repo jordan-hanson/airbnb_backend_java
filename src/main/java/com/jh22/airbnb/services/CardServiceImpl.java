@@ -1,11 +1,13 @@
 package com.jh22.airbnb.services;
 
+import com.jh22.airbnb.exceptions.ResourceNotFoundException;
 import com.jh22.airbnb.models.CardInfo;
 import com.jh22.airbnb.repositories.CardRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,15 +25,21 @@ public class CardServiceImpl implements CardService{
                 .forEachRemaining(list::add);
         return list;
     }
-
+    @Transactional
     @Override
     public CardInfo save(CardInfo newCard) {
-        return null;
+
+        CardInfo saveCard = new CardInfo();
+
+        CardInfo
     }
 
     @Override
-    public CardInfo findCardById(long cardId) {
-        return null;
+    public CardInfo findCardById(long cardId)
+    throws ResourceNotFoundException
+    {
+        return cardrepos.findById(cardId)
+                .orElseThrow(() -> new EntityNotFoundException("Card Id" + cardId + "Not Found!"));
     }
 
     @Override

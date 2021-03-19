@@ -68,18 +68,14 @@ public class UserServiceImpl implements UserService{
     @Override
     public User save(User newuser)
     {
-
-//        ASK FOR HELP ON THIS TO UNDERSTAND THE GETOWNERPROPERTIES ETC..
-
-//        STEP 1 VERIFY NEW USERNAME (UNIQUE = TRUE) ISN'T ON DB
-        User existingUser = userRepo.findByUsername(newuser.getUsername());
-        if (existingUser != null )
-        {
-            throw new ValidationException("User with " + newuser.getUsername() + " has already been taken.");
-        }
-
+        
         User newUserMade = new User();
 
+        if(newuser.getUserid() != 0)
+        {
+            userRepo.findById(newuser.getUserid());
+            newUserMade.setUserid(newuser.getUserid());
+        }
         newUserMade.setFirstname(newuser.getFirstname());
         newUserMade.setLastname(newuser.getLastname());
         newUserMade.setUsername(newuser.getUsername().toLowerCase());
