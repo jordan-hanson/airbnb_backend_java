@@ -85,4 +85,5 @@ public class UserController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 //    Use NO_CONTENT to see a 204 and a 1 back to see it worked.
+//    Update those on end points httpsstatus
 }
