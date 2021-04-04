@@ -120,6 +120,10 @@ public class User extends Auditable{
         return password;
     }
 
+    public void setPasswordNoEncrypt(String password)
+    {
+        this.password = password;
+    }
     public void setPassword(String password) {
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         this.password = passwordEncoder.encode(password);
