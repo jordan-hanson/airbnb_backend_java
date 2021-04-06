@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -76,14 +77,23 @@ public class UserController {
         userService.update(updateUser, userId);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+//    TODO REFACTOR ONCE SECURITY IS IMPLEMENTED TO GRAB USERID FROM SECURITY CONTEXT
+//    MAKE SURE I DID THIS CORRECTLY AND UNDERSTAND WHY WE DID IT THIS WAY.
 //    Delete User
 //    http://localhost:2019/users/user/1
     @DeleteMapping(value = "/user/{userId}")
-    public ResponseEntity<?> deleteUser(@PathVariable long userId)
+    public ResponseEntity<?> deleteUser(
+//            @PathVariable long userId
+    )
     {
-        userService.delete(userId);
+        User u = userService.findUserByUserName(SecurityContextHolder.getContext()
+            .getAuthentication()
+            .getName());
+
+        userService.delete(u.getUserid());
+
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 //    Use NO_CONTENT to see a 204 and a 1 back to see it worked.
-//    Update those on end points httpsstatus
+//    Update those on end points http status
 }

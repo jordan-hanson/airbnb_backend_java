@@ -72,14 +72,17 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
                         "/cards/**",
                         "/logout")
                 .authenticated()
-//                GET ALL PROPERTY LISTINGS 
+//                GET ALL PROPERTY LISTINGS
                 .antMatchers(HttpMethod.GET, "/properties/**")
                 .hasAnyRole("RENTER", "OWNER", "USER", "ADMIN")
+//                DELETE A PROPERTY
+                .antMatchers(HttpMethod.DELETE, "/properties/property/{propertyid}")
+                .hasAnyRole("OWNER", "ADMIN")
 //                ADD A NEW PROPERTY TO WEBSITE AS A LISTING
                 .antMatchers(HttpMethod.POST, "/properties/property")
                 .hasAnyRole("ADMIN", "OWNER")
 //                UPDATE POSTED PROPERTY INFORMATION
-                .antMatchers(HttpMethod.PATCH, "/properties/property")
+                .antMatchers(HttpMethod.PATCH, "/properties/property/{propertyid}")
                 .hasAnyRole("ADMIN", "OWNER")
 //                GET THEIR PERSONAL USER ACCOUNT INFO
                 .antMatchers(HttpMethod.GET, "/users/user")
@@ -90,8 +93,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 //                DELETE THEIR OWN ACCOUNT
                 .antMatchers(HttpMethod.DELETE, "/users/user")
                 .hasAnyRole("RENTER", "OWNER", "USER", "ADMIN")
-//              DO I NEED TO PUT IN ADMIN IF I GAVE PERMISSION PRIOR
-
+//
 
     }
 }
