@@ -14,7 +14,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.InMemoryTokenStore;
 
-import javax.annotation.Resource;
 
 /**
  * This class allows us to set standard security protocols to be used throughout the application,
@@ -46,7 +45,7 @@ public class SecurityConfig
      * Connects the user details used by Spring Security to our implementation of it
      */
 //    TODO RESOLVE SECURITY USER CANNOT RESOLVE BEAN
-    @Resource(name = "securityUserService")
+    @Autowired
     private UserDetailsService userDetailsService;
 
     /**

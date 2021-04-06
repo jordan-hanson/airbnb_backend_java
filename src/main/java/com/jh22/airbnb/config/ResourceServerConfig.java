@@ -6,6 +6,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configurers.ResourceServerSecurityConfigurer;
+import org.springframework.security.oauth2.provider.error.OAuth2AccessDeniedHandler;
 
 @Configuration
 @EnableResourceServer
@@ -67,33 +68,35 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
                         "/cards/**",
                         "/roles/**")
                 .hasAnyRole("ADMIN")
-                .antMatchers("/users/**",
-                        "/properties/**",
-                        "/cards/**",
-                        "/logout")
-                .authenticated()
 //                GET ALL PROPERTY LISTINGS
                 .antMatchers(HttpMethod.GET, "/properties/**")
                 .hasAnyRole("RENTER", "OWNER", "USER", "ADMIN")
 //                DELETE A PROPERTY
-                .antMatchers(HttpMethod.DELETE, "/properties/property/{propertyid}")
+                .antMatchers(HttpMethod.DELETE, "/properties/property")
                 .hasAnyRole("OWNER", "ADMIN")
 //                ADD A NEW PROPERTY TO WEBSITE AS A LISTING
                 .antMatchers(HttpMethod.POST, "/properties/property")
                 .hasAnyRole("ADMIN", "OWNER")
 //                UPDATE POSTED PROPERTY INFORMATION
-                .antMatchers(HttpMethod.PATCH, "/properties/property/{propertyid}")
+                .antMatchers(HttpMethod.PATCH, "/properties/property")
                 .hasAnyRole("ADMIN", "OWNER")
 //                GET THEIR PERSONAL USER ACCOUNT INFO
                 .antMatchers(HttpMethod.GET, "/users/user")
                 .hasAnyRole("RENTER", "OWNER", "USER", "ADMIN")
 //                UPDATE THEIR OWN ACCOUNT INFO
-                .antMatchers(HttpMethod.PATCH, "/users/user")
+                .antMatchers(HttpMethod.PATCH, "/users/user/**")
                 .hasAnyRole("RENTER", "OWNER", "USER", "ADMIN")
 //                DELETE THEIR OWN ACCOUNT
-                .antMatchers(HttpMethod.DELETE, "/users/user")
+                .antMatchers(HttpMethod.DELETE, "/users/user/**")
                 .hasAnyRole("RENTER", "OWNER", "USER", "ADMIN")
-//
+                .antMatchers("/users/**",
+                        "/properties/**",
+                        "/cards/**",
+                        "/logout")
+                .authenticated()
+                .and()
+                .exceptionHandling()
+                .accessDeniedHandler(new OAuth2AccessDeniedHandler());
 
     }
 }
