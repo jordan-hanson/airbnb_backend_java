@@ -22,8 +22,6 @@ public class CardController {
     @Autowired
     private CardService cardService;
 
-//  TODO: AUTHORIZE ONLY ADMIN WHEN SECURITY IS ADDED
-
 //    Find All Users
 //    http://localhost:2019/cards/cards
     @GetMapping(value= "/cards", produces = "application/json")

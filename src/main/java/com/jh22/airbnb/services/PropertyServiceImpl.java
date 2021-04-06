@@ -49,7 +49,6 @@ public class PropertyServiceImpl implements PropertyService{
         return propertyrepos.findByTitle(title);
 //                .orElseThrow(()-> new ResourceNotFoundException("Property Title " + title + " Not Found!");
     }
-// TODO CREATE NEW PROPERTY AND UPDATE IT.
     @Transactional
     @Override
     public Property save(Property newproperty) {

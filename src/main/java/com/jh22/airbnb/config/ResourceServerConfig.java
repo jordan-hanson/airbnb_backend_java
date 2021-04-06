@@ -59,7 +59,6 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
                         "/roles/**")
                 .hasAnyRole("ADMIN")
                 .antMatchers(HttpMethod.GET, "/users/**",
-                        "/properties/**",
                         "/cards/**",
                         "/roles/**")
                 .hasAnyRole("ADMIN")
@@ -73,10 +72,26 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
                         "/cards/**",
                         "/logout")
                 .authenticated()
+//                GET ALL PROPERTY LISTINGS 
                 .antMatchers(HttpMethod.GET, "/properties/**")
                 .hasAnyRole("RENTER", "OWNER", "USER", "ADMIN")
+//                ADD A NEW PROPERTY TO WEBSITE AS A LISTING
+                .antMatchers(HttpMethod.POST, "/properties/property")
+                .hasAnyRole("ADMIN", "OWNER")
+//                UPDATE POSTED PROPERTY INFORMATION
+                .antMatchers(HttpMethod.PATCH, "/properties/property")
+                .hasAnyRole("ADMIN", "OWNER")
+//                GET THEIR PERSONAL USER ACCOUNT INFO
+                .antMatchers(HttpMethod.GET, "/users/user")
+                .hasAnyRole("RENTER", "OWNER", "USER", "ADMIN")
+//                UPDATE THEIR OWN ACCOUNT INFO
                 .antMatchers(HttpMethod.PATCH, "/users/user")
                 .hasAnyRole("RENTER", "OWNER", "USER", "ADMIN")
+//                DELETE THEIR OWN ACCOUNT
+                .antMatchers(HttpMethod.DELETE, "/users/user")
+                .hasAnyRole("RENTER", "OWNER", "USER", "ADMIN")
+//              DO I NEED TO PUT IN ADMIN IF I GAVE PERMISSION PRIOR
+
 
     }
 }

@@ -138,7 +138,6 @@ public class UserServiceImpl implements UserService{
     @Override
     public User update(User updateUser, long userId)
     {
-//        TODO MODIFY TO UPDATE USER
         User existingUser = userRepo.findById(userId)
                 .orElseThrow(() -> new EntityNotFoundException("User" + userId + "Not Found!"));
 
