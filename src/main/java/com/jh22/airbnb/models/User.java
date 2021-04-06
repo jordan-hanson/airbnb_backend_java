@@ -77,7 +77,8 @@ public class User extends Auditable{
         this.lastname = lastname;
         this.username = username;
         this.primaryemail = primaryemail;
-        this.password = password;
+//        this.password = password;
+        setPassword(password);
     }
 
     public long getUserid() {

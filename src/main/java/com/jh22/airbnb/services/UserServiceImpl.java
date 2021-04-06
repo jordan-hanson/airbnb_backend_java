@@ -82,7 +82,7 @@ public class UserServiceImpl implements UserService{
         newUserMade.setPrimaryemail(newuser.getPrimaryemail());
 
 //      PASSWORD OWNERPROPERTIES RENTALPROPERTIES AND ROLES
-        newUserMade.setPassword(newuser.getPassword());
+        newUserMade.setPasswordNoEncrypt(newuser.getPassword());
 //      OWNERPROPERTIES RELATIONSHIP - CREATE SERVICES FOR PROPERTYID AND USERID IS ABOVE^ AND AUTOWIRE IN
         newUserMade.getOwnerproperties()
                 .clear();
@@ -159,7 +159,7 @@ public class UserServiceImpl implements UserService{
         }
         if (updateUser.getPassword() != null)
         {
-            existingUser.setPassword(updateUser.getPassword().toLowerCase());
+            existingUser.setPasswordNoEncrypt(updateUser.getPassword());
         }
 
         if (updateUser.getOwnerproperties()
