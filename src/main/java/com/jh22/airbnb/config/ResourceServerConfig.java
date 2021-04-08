@@ -47,7 +47,11 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
                         "/swagger-ui.html",
                         "/v2/api-docs",
                         "/webjars/**",
-                        "/createnewuser")
+                        "/createnewuser",
+                        "/properties",
+                        "/properties/",
+                        "/properties/{propertyid}",
+                        "/properties/{title}")
                 .permitAll()
                 .antMatchers(HttpMethod.POST, "/users/**",
                             "/properties/**",
@@ -90,7 +94,6 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
                 .antMatchers(HttpMethod.DELETE, "/users/user/**")
                 .hasAnyRole("RENTER", "OWNER", "USER", "ADMIN")
                 .antMatchers("/users/**",
-                        "/properties/**",
                         "/cards/**",
                         "/logout")
                 .authenticated()
