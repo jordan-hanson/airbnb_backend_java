@@ -15,5 +15,5 @@ import org.springframework.boot.CommandLineRunner;
 @Component
 public class SeedData
         implements CommandLineRunner{
-    
+
 }
